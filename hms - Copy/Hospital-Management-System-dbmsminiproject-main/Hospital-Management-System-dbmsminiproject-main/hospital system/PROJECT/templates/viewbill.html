@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Booking
+{% endblock title %}
+
+{% block body %}
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+    {{message}}
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+        {% if current_user.usertype=="Doctor" %}
+            <th scope="col">PID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">DISEASE</th>
+            <th scope="col">BILL</th>
+            <th scope="col">CLEAR BILL</th>
+        {% else %}
+            <th scope="col">PID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">DISEASE</th>
+            <th scope="col">BILL</th>
+        {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in query %}
+    <tr>
+        {% if current_user.usertype=="Doctor" %}
+            <th scope="row">{{post.pid}}</th>
+            <td>{{post.name}}</td>
+            <td>{{post.disease}}</td>
+            <td>{{post.bill}}</td>
+            <td><a href="/delete_bill/{{post.pid}}"><button onclick="return confirm('Are you sure to Delete data');" class="btn btn-success">CLEAR </button> </a> </td>
+        {% else %}
+            <th scope="row">{{post.pid}}</th>
+            <td>{{post.name}}</td>
+            <td>{{post.disease}}</td>
+            <td>{{post.bill}}</td>
+        {% endif %}
+    </tr>
+{% endfor %}
+  
+  </tbody>
+</table>
+
+
+{% endblock body %}

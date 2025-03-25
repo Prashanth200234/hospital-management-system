@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Doctors
+{% endblock title %}
+
+{% block css %}
+<style>
+    /* Custom CSS for styling input fields */
+    .form-control {
+        background-color: rgb(238, 218, 130); /* Change background color to violet */
+        color: rgb(235, 224, 255); /* Change text color to light yellow */
+    }
+
+    /* Custom CSS for changing the green color to light yellow */
+    .text-success {
+        color: rgb(229, 224, 255) !important; /* Change text color to light yellow */
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% with messages=get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                {{message}}
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            
+            <br>
+            <h2 class="text-center text-white bg-danger">AMBULANE REQUEST</h2>
+
+
+            <br>
+            <form action="/emergency" method="post" class="jumbotron">
+                
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="p_name" placeholder="enter patient Name" required>
+
+                </div>
+                <div class="form-group">
+
+                    <input type="integer" class="form-control" name="p_address" placeholder="enter patient address" required>
+
+                </div>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="p_type" placeholder="enter patient type" required>
+
+                </div>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="p_no" placeholder="enter patient mob no" required>
+
+                </div>
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="p_condition" placeholder="enter patient codition" required>
+
+                </div>
+
+                
+
+
+
+                <button type="submit" class="btn btn-dark btn-sm btn-block">SUBMIT</button>
+
+            </form>
+
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Booking
+{% endblock title %}
+
+{% block body %}
+  {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+          <th scope="col">pacient_name</th>
+          <th scope="col">pacient address</th>
+          <th scope="col">pacient type</th>
+          <th scope="col">pacient condition</th>
+          <th scope="col">pacient phone number</th>
+
+      </tr>
+    </thead>
+    
+    <tbody>
+      {% for post in query %}
+        <tr>
+            <td>{{post.p_name}}</td>
+            <td>{{post.p_address}}</td>
+            <td>{{post.p_type}}</td>
+            <td>{{post.p_condition}}</td>
+            <td>{{post.p_no}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock body %}
